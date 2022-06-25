@@ -7,6 +7,7 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import CustomNavbar from "../../../components/common/Navbar";
 import { useState, useEffect } from "react";
 import { getClientBuildManifest } from "next/dist/client/route-loader";
+import axios from "axios";
 
 const mockData = [
   {
@@ -43,6 +44,15 @@ function Detail() {
   const router = useRouter();
   const { id } = router.query;
   const details = mockData[id - 1];
+  const [notices, setNotices] =useState();
+
+  useEffect(()=>{
+    axios.get("http://localhost:5000/post")
+    .then(res=>{
+      setNotices(res.data)
+    })
+    .catch((error)=>console.log(error));
+  }, [notices])
 
   const [active, setActive] = useState("전체");
 
