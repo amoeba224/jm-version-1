@@ -47,11 +47,12 @@ function Detail() {
   const [notices, setNotices] =useState();
 
   useEffect(()=>{
-    axios.get("http://localhost:5000/post")
+    axios.get("http://localhost:5000/notice")
     .then(res=>{
       setNotices(res.data)
     })
     .catch((error)=>console.log(error));
+    console.log(notices)
   }, [notices])
 
   const [active, setActive] = useState("전체");
