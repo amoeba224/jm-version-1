@@ -6,49 +6,24 @@ import CustomNavbar from '../components/common/Navbar'
 import NoticeList from "../components/common/NoticeList";
 import { Stack, Container, Row, Col } from "react-bootstrap";
 import { useState, useEffect } from "react";
-
-const mockData = [
-  {
-    id: 1,
-    title: "제목1",
-    body: "내용1",
-    writer: "문태주",
-    date: "2022-01-01",
-    category: "skku",
-  },
-  {
-    id: 2,
-    title: "제목2",
-    body: "내용2",
-    writer: "문태주",
-    date: "2022-01-01",
-    category: "center",
-  },
-  {
-    id: 3,
-    title: "제목3",
-    body: "내용3",
-    writer: "문태주",
-    date: "2022-01-01",
-    category: "study",
-  },
-];
+import axios from 'axios';
 
 export default function Home() {
   const [active, setActive] = useState("전체");
-  const [notices, setNotices] = useState(mockData);
+  const [notices, setNotices] =useState([]);
   const [category, setCategory] = useState("center");
 
   const getNotice = async () => {
-    setNotices(
-      mockData.filter((item) => {
-        if (category === "center") return true;
-        if (category === item.category) return true;
+    const {data} = await axios.get("api/notice")
+    const usingData = data.filter((item) => {
+      if (category === "center") return true;
+      if (category === item.category) return true;
 
-        return false;
-      })
-    );
+      return false;
+    })  
+    setNotices(usingData);
   };
+
   useEffect(() => {
     getNotice();
   }, [category]);
@@ -60,8 +35,8 @@ export default function Home() {
           <div>
             {notices.map((notice) => (
               <NoticeList
-                key={notice.id}
-                id={notice.id}
+                key={notice._id}
+                id={notice._id}
                 title={notice.title}
                 date={notice.date}
                 writer={notice.writer}

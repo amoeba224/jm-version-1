@@ -9,51 +9,16 @@ import { useState, useEffect } from "react";
 import { getClientBuildManifest } from "next/dist/client/route-loader";
 import axios from "axios";
 
-const mockData = [
-  {
-    id: 1,
-    title: "제목1",
-    body: "내용1",
-    writer: "문태주",
-    date: "2022-01-01",
-    category: "skku",
-  },
-  {
-    id: 2,
-    title: "제목2",
-    body: "내용2",
-    writer: "문태주",
-    date: "2022-01-01",
-    category: "center",
-  },
-  {
-    id: 3,
-    title: "제목3",
-    body: "내용3",
-    writer: "문태주",
-    date: "2022-01-01",
-    category: "study",
-  },
-];
-function getById(id) {
-  const array = mockData.filter((x) => x.id == id);
-  return null;
+const getById = async (id) => {
+  const data = await axios.get(`api/notice/${id}`);
+  console.log(data)
+  return null
 }
 
 function Detail() {
   const router = useRouter();
   const { id } = router.query;
-  const details = mockData[id - 1];
-  const [notices, setNotices] =useState();
-
-  useEffect(()=>{
-    axios.get("http://localhost:5000/notice")
-    .then(res=>{
-      setNotices(res.data)
-    })
-    .catch((error)=>console.log(error));
-    console.log(notices)
-  }, [notices])
+  const details = getById(id);
 
   const [active, setActive] = useState("전체");
 
