@@ -1,57 +1,33 @@
-import Head from 'next/head'
-import Image from 'next/image'
+/* eslint-disable react-hooks/exhaustive-deps */
 import 'bootstrap/dist/css/bootstrap.min.css';
-import AdminNavbar from '../../components/common/AdminNav'
-import Link from "next/link";
-import { Stack, Container, Row, Col } from "react-bootstrap";
-import { useState, useEffect } from 'react';
-import NoticeList from '../../components/common/NoticeList';
+import AdminNavbar from '../../components/common/AdminNav';
+import NoticeList from "../../components/common/NoticeList";
+import { Stack, Container, Row, Col, Button } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import axios from "axios"
 
-const mockData = [
-  {
-    id: 1,
-    title: "제목1",
-    body: "내용1",
-    writer: "문태주",
-    date: "2022-01-01",
-    category: "skku",
-  },
-  {
-    id: 2,
-    title: "제목2",
-    body: "내용2",
-    writer: "문태주",
-    date: "2022-01-01",
-    category: "center",
-  },
-  {
-    id: 3,
-    title: "제목3",
-    body: "내용3",
-    writer: "문태주",
-    date: "2022-01-01",
-    category: "study",
-  },
-];
 
 export default function Edit() {
   const [active, setActive] = useState("전체");
-  const [notices, setNotices] = useState(mockData);
+  const [notices, setNotices] = useState([]);
   const [category, setCategory] = useState("center");
 
   const getNotice = async () => {
-    setNotices(
-      mockData.filter((item) => {
-        if (category === "center") return true;
-        if (category === item.category) return true;
+    const {data} = await axios.get("/api/notice");
+    const usingData = data.filter((item) => {
+      if (category === "center") return true;
+      if (category === item.category) return true;
 
-        return false;
-      })
-    );
+      return false;
+    })  
+    setNotices(usingData);
   };
+
   useEffect(() => {
     getNotice();
+  // eslint-disable-next-lingie react-hooks/exhaustive-deps
   }, [category]);
+
   return (
     <>
       <AdminNavbar name="Likelion SKKU Notice Admin" active={active} />
@@ -60,8 +36,8 @@ export default function Edit() {
           <div>
             {notices.map((notice) => (
               <NoticeList
-                key={notice.id}
-                id={notice.id}
+                key={notice._id}
+                id={notice._id}
                 title={notice.title}
                 date={notice.date}
                 writer={notice.writer}
@@ -71,7 +47,8 @@ export default function Edit() {
             ))}
           </div>
         </div>
+        <Button href="/admin/create">새 글 작성</Button>
       </Stack>
     </>
-  )
+  );
 }

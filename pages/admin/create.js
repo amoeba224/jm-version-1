@@ -5,8 +5,9 @@ import AdminNavbar from '../../components/common/AdminNav'
 import Write from '../../components/common/Write'
 import { useState } from 'react';
 
-export default function Create() {
+export default function Create(props) {
   const [active, setActive] = useState("전체");
+  console.log(props)
   return (
     <>
       <AdminNavbar name="Likelion SKKU Notice Admin" active={active} />
