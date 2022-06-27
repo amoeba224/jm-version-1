@@ -4,21 +4,27 @@ import Head from "next/head";
 import Image from "next/image";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col, Card } from "react-bootstrap";
-import CustomNavbar from "../../../components/common/Navbar";
+import CustomNavbar from "../../components/common/Navbar";
 import { useState, useEffect } from "react";
 import { getClientBuildManifest } from "next/dist/client/route-loader";
 import axios from "axios";
 
-const getById = async (id) => {
-  const data = await axios.get(`api/notice/${id}`);
-  console.log(data)
-  return null
-}
+
 
 function Detail() {
   const router = useRouter();
   const { id } = router.query;
-  const details = getById(id);
+  const [details, setDetails] = useState({})
+
+  const getById = async (id) => {
+    const { data } = await axios.get(`api/notice/${id}`);
+    await setDetails(data);
+    console.log(details);
+  };
+
+  useEffect(() => {
+    getById(id);
+  }, [id]);
 
   const [active, setActive] = useState("전체");
 
@@ -38,8 +44,7 @@ function Detail() {
           <Card.Header>{details.title}</Card.Header>
           <Card.Body>
             <blockquote className="blockquote mb-0">
-              <p> {details.body}
-               </p>
+              <p> {details.body}</p>
             </blockquote>
           </Card.Body>
         </Card>
