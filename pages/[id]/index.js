@@ -42,8 +42,7 @@ function Detail() {
           <Card.Header>{details.title}</Card.Header>
           <Card.Body>
             <blockquote className="blockquote mb-0">
-              <p> {details.body}
-               </p>
+              <p> {details.body}</p>
             </blockquote>
           </Card.Body>
         </Card>
