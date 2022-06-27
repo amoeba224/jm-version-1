@@ -4,55 +4,27 @@ import Head from "next/head";
 import Image from "next/image";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col, Card } from "react-bootstrap";
-import CustomNavbar from "../../../components/common/Navbar";
+import CustomNavbar from "../../components/common/Navbar";
 import { useState, useEffect } from "react";
 import { getClientBuildManifest } from "next/dist/client/route-loader";
 import axios from "axios";
 
-const mockData = [
-  {
-    id: 1,
-    title: "제목1",
-    body: "내용1",
-    writer: "문태주",
-    date: "2022-01-01",
-    category: "skku",
-  },
-  {
-    id: 2,
-    title: "제목2",
-    body: "내용2",
-    writer: "문태주",
-    date: "2022-01-01",
-    category: "center",
-  },
-  {
-    id: 3,
-    title: "제목3",
-    body: "내용3",
-    writer: "문태주",
-    date: "2022-01-01",
-    category: "study",
-  },
-];
-function getById(id) {
-  const array = mockData.filter((x) => x.id == id);
-  return null;
-}
+
 
 function Detail() {
   const router = useRouter();
   const { id } = router.query;
-  const details = mockData[id - 1];
-  const [notices, setNotices] =useState();
+  const [details, setDetails] = useState({})
 
-  useEffect(()=>{
-    axios.get("http://localhost:5000/post")
-    .then(res=>{
-      setNotices(res.data)
-    })
-    .catch((error)=>console.log(error));
-  }, [notices])
+  const getById = async (id) => {
+    const { data } = await axios.get(`api/notice/${id}`);
+    await setDetails(data);
+    console.log(details);
+  };
+
+  useEffect(() => {
+    getById(id);
+  }, [id]);
 
   const [active, setActive] = useState("전체");
 
@@ -72,8 +44,7 @@ function Detail() {
           <Card.Header>{details.title}</Card.Header>
           <Card.Body>
             <blockquote className="blockquote mb-0">
-              <p> {details.body}
-               </p>
+              <p> {details.body}</p>
             </blockquote>
           </Card.Body>
         </Card>
