@@ -10,11 +10,11 @@ import { getClientBuildManifest } from "next/dist/client/route-loader";
 import axios from "axios";
 
 
-
 function Detail() {
+  
   const router = useRouter();
   const { id } = router.query;
-  const [details, setDetails] = useState({})
+  const [details, setDetails] = useState({});
 
   const getById = async (id) => {
     const { data } = await axios.get(`api/notice/${id}`);
@@ -22,9 +22,7 @@ function Detail() {
     console.log(details);
   };
 
-  useEffect(() => {
-    getById(id);
-  }, [id]);
+  useEffect(()=>{getById(id)}, [id]);
 
   const [active, setActive] = useState("전체");
 

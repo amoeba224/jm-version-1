@@ -1,22 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import Head from 'next/head'
-import Image from 'next/image'
-import Link from "next/link";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import CustomNavbar from '../../components/common/AdminNav'
+import AdminNavbar from '../../components/common/AdminNav';
 import NoticeList from "../../components/common/NoticeList";
 import { Stack, Container, Row, Col, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import axios from 'axios';
+import axios from "axios"
+
 
 export default function Home() {
   const [active, setActive] = useState("전체");
-  const [notices, setNotices] =useState([]);
+  const [notices, setNotices] = useState([]);
   const [category, setCategory] = useState("center");
 
   const getNotice = async () => {
-    const {data} = await axios.get("/api/notice")
-    console.log(data);
+    const {data} = await axios.get("/api/notice");
     const usingData = data.filter((item) => {
       if (category === "center") return true;
       if (category === item.category) return true;
@@ -28,11 +25,12 @@ export default function Home() {
 
   useEffect(() => {
     getNotice();
+  // eslint-disable-next-lingie react-hooks/exhaustive-deps
   }, [category]);
 
   return (
     <>
-      <CustomNavbar name="Likelion SKKU Notice" active={active} />
+      <AdminNavbar name="Likelion SKKU Notice Admin" active={active} />
       <Stack gap={3}>
         <div className="bg-light border">
           <div>
@@ -49,6 +47,7 @@ export default function Home() {
             ))}
           </div>
         </div>
+        <Button href="/admin/create">새 글 작성</Button>
       </Stack>
     </>
   );

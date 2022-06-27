@@ -34,7 +34,6 @@ export default function AdminNavbar(props) {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/admin" active={mainActive}>Dashboard</Nav.Link>
-            <Nav.Link href="/admin/create" active={createActive}>Create</Nav.Link>
             <Nav.Link href="/admin/edit" active={editActive}>Edit</Nav.Link>
           </Nav>
           <Nav>

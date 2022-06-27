@@ -1,3 +1,13 @@
+ module.exports = {
+  compiler: {
+    emotion: {
+      sourceMap: true,
+      autoLabel: true,
+      labelFormat: "[local]",
+    },
+  },
+};
+
 const nextConfig = {
   reactStrictMode: true,
   async rewrites() {
@@ -11,3 +21,4 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
+

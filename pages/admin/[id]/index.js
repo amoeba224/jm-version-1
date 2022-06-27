@@ -1,35 +1,37 @@
 import { useRouter } from "next/router";
-import Link from "next/link";
-import Head from "next/head";
-import Image from "next/image";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Row, Col, Card } from "react-bootstrap";
-import CustomNavbar from "../../../components/common/AdminNav";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { getClientBuildManifest } from "next/dist/client/route-loader";
 import axios from "axios";
-
+import AdminNavbar from './../../../components/common/AdminNav';
 
 
 function Detail() {
+  
   const router = useRouter();
   const { id } = router.query;
-  const [details, setDetails] = useState({})
+  const [details, setDetails] = useState({});
 
   const getById = async (id) => {
     const { data } = await axios.get(`/api/notice/${id}`);
-    setDetails(data)
+    await setDetails(data);
+    console.log(details);
   };
 
-  useEffect(() => {
-    getById(id);
-  }, [id]);
+  const handleDelete = async (id) => {
+    const result = await axios.delete(`/api/notice/${id}`);
+    console.log(result);
+  }
+
+  useEffect(()=>{getById(id)}, [id]);
 
   const [active, setActive] = useState("전체");
 
   return (
     <>
-      <CustomNavbar name="Likelion SKKU Notice" active={active} />
+      <AdminNavbar name="Likelion SKKU Notice" active={active} />
       <div className="detail">
         <Container>
           <Row md={4}>
@@ -47,9 +49,11 @@ function Detail() {
             </blockquote>
           </Card.Body>
         </Card>
+        <Link href={`/admin/update/${id}`}><Button>수정</Button></Link>
+        <Button onClick={()=>handleDelete(id)}>삭제</Button>
       </div>
     </>
   );
 }
 
-export default Detail;
+
