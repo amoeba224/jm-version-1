@@ -24,9 +24,9 @@ export default function Write(props){
             const body = event.target.body.value;
             props.onCreate(title, body);
         }}>
-            <p><input type="text" name="title" placeholder="title"/></p>
-            <p><textarea name="body" placeholder="body"></textarea></p>
-            <p><input type="submit" value="Create"></input></p>
+            <p><input type="text" name="title" placeholder="제목"/></p>
+            <p><textarea name="body" placeholder="내용을 입력하세요"></textarea></p>
+            <p><input type="submit" value="저장"></input></p>
         </form>
     </article>
     );

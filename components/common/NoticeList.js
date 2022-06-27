@@ -12,7 +12,7 @@ function NoticeList({ id, title, category, date, writer }) {
                 {category}
               </Col>
               <Col xs={12} md={8}>
-                <Link href={`${category}/${id}`}>
+                <Link href={`${id}`}>
                   <a>{title}</a>
                 </Link>
               </Col>
