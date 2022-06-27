@@ -13,13 +13,13 @@ export default function Home() {
   const [category, setCategory] = useState("center");
 
   const getNotice = async () => {
-    const {data} = await axios.get("api/notice")
+    const { data } = await axios.get("api/notice");
     const usingData = data.filter((item) => {
       if (category === "center") return true;
       if (category === item.category) return true;
 
       return false;
-    })  
+    });
     setNotices(usingData);
   };
 

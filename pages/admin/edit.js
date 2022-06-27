@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import axios from "axios"
 
 
-export default function Edit() {
+export default function Home() {
   const [active, setActive] = useState("전체");
   const [notices, setNotices] = useState([]);
   const [category, setCategory] = useState("center");
