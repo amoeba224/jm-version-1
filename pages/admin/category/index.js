@@ -30,7 +30,10 @@ export default function Category() {
   const [categories, setCategories] = useState([]);
   const [input, setInput] = useState("");
 
-  
+  const authenticate = async () => {
+    const result = await axios.get("/api/user/auth");
+    console.log(result);
+  }
 
   const getCategories = async () => {
     const { data } = await axios.get("/api/category");
@@ -60,6 +63,7 @@ export default function Category() {
   
 
   useEffect(() => {
+    authenticate();
     getCategories();
   }, []);
 
