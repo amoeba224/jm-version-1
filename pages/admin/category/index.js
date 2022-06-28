@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Stack, Container, Row, Col, Form } from "react-bootstrap";
 import axios from "axios";
-
-
-
+import {authenticate} from "../../../public/auth";
 
 
 const categoryButton = (handleDelete, category) => {
@@ -30,10 +28,7 @@ export default function Category() {
   const [categories, setCategories] = useState([]);
   const [input, setInput] = useState("");
 
-  const authenticate = async () => {
-    const result = await axios.get("/api/user/auth");
-    console.log(result);
-  }
+
 
   const getCategories = async () => {
     const { data } = await axios.get("/api/category");
@@ -63,7 +58,13 @@ export default function Category() {
   
 
   useEffect(() => {
-    authenticate();
+    authenticate().then((res)=>{
+      if (res) {
+        console.log("인증되었습니다.")
+      } else {
+        alert("인증정보가 없습니다. 홈페이지로 리다이렉트합니다.")
+      }
+    });
     getCategories();
   }, []);
 

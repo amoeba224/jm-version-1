@@ -2,6 +2,7 @@ import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import styled from "@emotion/styled";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import {logout} from "../../public/auth";
 
 const StyledNavbar = styled(Navbar)`
   padding: 15px 0;
@@ -10,6 +11,11 @@ const StyledNavbar = styled(Navbar)`
 export default function AdminNavbar(props) {
   const router = useRouter();
   let { mainActive, createActive, editActive } = false;
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    logout().then((res)=>console.log(res)).catch((err)=>console.log(err));
+  }
 
   switch(router.pathname) {
     case "/admin":
@@ -37,7 +43,7 @@ export default function AdminNavbar(props) {
             <Nav.Link href="/admin/edit" active={editActive}>Edit</Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link href="/">Logout</Nav.Link>
+            <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
