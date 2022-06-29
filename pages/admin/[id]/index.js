@@ -42,7 +42,7 @@ function Detail() {
 
   return (
     <>
-      <AdminNavbar name="Likelion SKKU Notice" active={active} />
+      <AdminNavbar name="Likelion SKKU Notice Admin" active={active} />
       <div className="detail">
         <Container>
           <Row md={4}>
