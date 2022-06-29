@@ -32,7 +32,6 @@ export default function CustomNavbar(props) {
 
   useEffect(()=>{
     authenticate().then((res)=>{
-      console.log(res);
       if (res === true) {
         setIsAuthenticated(true);
       } else {
