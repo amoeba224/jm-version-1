@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import axios from "axios";
 import AdminNavbar from './../../../components/common/AdminNav';
-import {authenticate} from "../../../public/auth";
+import {authenticate, getUser} from "../../../public/auth";
 
 function Detail() {
   const router = useRouter();
