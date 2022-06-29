@@ -8,42 +8,42 @@ import styled from "@emotion/styled";
 function NoticeList({ id, title, category, date, writer }) {
   const rowHeight = 50;
   const day = moment(date).format("YYYY. MM. DD");
-
   const handleMouseOver = (e) => {
     e.preventDefault();
     document.getElementById(id).style.backgroundColor = "orange";
-    document.getElementById(id).style.boxShadow = "5px 5px";
   };
 
   const handleMouseOut = (e) => {
     e.preventDefault();
     document.getElementById(id).style.backgroundColor = "white";
-    document.getElementById(id).style.boxShadow = "none";
   };
 
   return (
-    <div>
-      <Link href={`${id}`}>
-        <Row
-          className="mt-5"
+    <>
+      <Link href={`${id}`} style={{ textDecoration: "none" }}>
+        <Stack gap={3}  style={{ marginBottom: "15px" }} >
+          <Row
           id={`${id}`}
-          onMouseOver={(e) => handleMouseOver(e)}
-          onMouseOut={(e) => handleMouseOut(e)}
-        >
-          <Col>{title}</Col>
-          <Col>{writer}</Col>
-          <Col>{day}</Col>
-        </Row>
+          onMouseOver={(e)=>handleMouseOver(e)} onMouseOut={(e)=>handleMouseOut(e)}
+            rowSpacing={2}
+            style={{
+              padding: "20px",
+              width: "760px",
+              backgroundColor: "white",
+              boxShadow: "5px 5px 9px",
+              borderRadius: "10px",
+              display: "flex",
+              flexDirection: "row",
+            }}
+          >
+            <Col style={{ flex: 4 }}>{title} </Col>
+            <Col style={{ flex: 1 }}>{writer}</Col>
+            <Col style={{ flex: 1 }}>{day}</Col>
+          </Row>
+        </Stack>
       </Link>
-    </div>
+    </>
   );
-}
-
-NoticeList.propTypes = {
-  title: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
-  writer: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
 };
 
 export default NoticeList;

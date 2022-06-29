@@ -6,8 +6,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Pagination from "../components/common/Pagination";
 import styled from "@emotion/styled";
-import Picture from "../components/common/Picture";
-import Likelion from "../public/likelionuniv.png";
+import center from "../public/center.jpg";
+import StyledFooter from "../components/common/Footer";
+import Image from "next/image";
 
 export default function Home() {
   const [active, setActive] = useState("전체");
@@ -30,7 +31,7 @@ export default function Home() {
     setNotices(usingData);
   };
 
-const updateNotice = async (e) => {
+  const updateNotice = async (e) => {
     e.preventDefault();
     const { data } = await axios.get("api/notice");
     const usingData = data
@@ -45,78 +46,84 @@ const updateNotice = async (e) => {
     );
   };
 
-useEffect(() => {
+  useEffect(() => {
     getNotice();
   }, []);
 
-
-return (
-  <>
-    <CustomNavbar name="Likelion SKKU Notice" active={active} />
-    <Form>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>검색창</Form.Label>
-        <Form.Control
-          onChange={(e) => setSearchInput(e.target.value)}
-          type="text"
-          placeholder="Search title"
-        />
-      </Form.Group>
-      <Button
-        variant="primary"
-        type="submit"
-        value="제출"
-        onClick={(e) => updateNotice(e)}
+  return (
+    <>
+      <CustomNavbar name="Likelion SKKU Notice" active={active} />
+      <StyledHeader>
+        <Pictures>
+          <StyledImage src={center} alt="backgroundImage"></StyledImage>
+        </Pictures>
+        <StyledText>
+          <h1>LIKELION UNIV.</h1>
+        </StyledText>
+      </StyledHeader>
+      <Form
+        className="panel mt-5 mb-5 align-middle d-flex justify-content-center
+        "
       >
-        검색
-      </Button>
-    </Form>
-
-    <Pictures>
-      <Picture src={Likelion}></Picture>
-    </Pictures>
-    <h1>중앙 멋사 공지</h1>
-    <Layout>
-      <Stack gap={3}>
-        <div className="bg-light border">
-          <div>
-            {notices.slice(offset, offset + limit).map((notice) => (
-              <NoticeList
-                key={notice._id}
-                id={notice._id}
-                title={notice.title}
-                date={notice.date}
-                writer={notice.writer}
-                category={notice.category}
-                body={notice.body}
-              />
-            ))}
-          </div>
-        </div>
-      </Stack>
-      <label>
-        페이지 당 표시할 게시물 수:&nbsp;
-        <select
-          type="number"
-          value={limit}
-          onChange={({ target: { value } }) => setLimit(Number(value))}
+        <Form.Group controlId="formBasicEmail" style={{ width: "700px" }}>
+          <Form.Control
+            onChange={(e) => setSearchInput(e.target.value)}
+            type="text"
+            placeholder="검색어를 입력하세요"
+          />
+        </Form.Group>
+        <Button
+          type="submit"
+          value="제출"
+          onClick={(e) => updateNotice(e)}
+          style={{
+            backgroundColor: "#FF9E1B",
+            border: "white",
+            marginLeft: "10px",
+          }}
         >
-          <option value="10">10</option>
-          <option value="12">12</option>
-          <option value="20">20</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
-        </select>
-      </label>
-      <Pagination
-        total={notices.length}
-        limit={limit}
-        page={page}
-        setPage={setPage}
-      />
-    </Layout>
-  </>
-);}
+          검색
+        </Button>
+      </Form>
+      <Layout>
+        <div>
+          {notices.slice(offset, offset + limit).map((notice) => (
+            <NoticeList
+              key={notice._id}
+              id={notice._id}
+              title={notice.title}
+              date={notice.date}
+              writer={notice.writer}
+              category={notice.category}
+              body={notice.body}
+            />
+          ))}
+        </div>
+        <br></br>
+        <label>
+          페이지 당 표시할 게시물 수:&nbsp;
+          <select
+            type="number"
+            value={limit}
+            onChange={({ target: { value } }) => setLimit(Number(value))}
+          >
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+          </select>
+        </label>
+        <Pagination
+          total={notices.length}
+          limit={limit}
+          page={page}
+          setPage={setPage}
+        />
+      </Layout>
+      <br></br>
+      <StyledFooter></StyledFooter>
+    </>
+  );
+}
 
 const Layout = styled.div`
   display: flex;
@@ -129,4 +136,23 @@ const Pictures = styled.div`
   display: flex;
   justify-content: center;
   height: 200px;
+`;
+
+const StyledHeader = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+  position: relative;
+`;
+
+const StyledText = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: white;
+  transform: translate(-50%, -50%);
+`;
+
+const StyledImage = styled(Image)`
+  border-radius: 10px;
 `;

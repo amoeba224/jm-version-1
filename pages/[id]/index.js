@@ -8,11 +8,12 @@ import CustomNavbar from "../../components/common/Navbar";
 import { useState, useEffect } from "react";
 import { getClientBuildManifest } from "next/dist/client/route-loader";
 import axios from "axios";
-
-
+import styled from "@emotion/styled";
+import moment from "moment";
+import "moment/locale/ko";
+import StyledFooter from "/components/common/Footer";
 
 function Detail() {
-  
   const router = useRouter();
   const { id } = router.query;
   const [details, setDetails] = useState({});
@@ -20,36 +21,46 @@ function Detail() {
   const getById = async (id) => {
     const { data } = await axios.get(`api/notice/${id}`);
     await setDetails(data);
-    console.log(details);
   };
 
-  useEffect(()=>{getById(id)}, [id]);
+  useEffect(() => {
+    getById(id);
+  }, [id]);
 
   const [active, setActive] = useState("전체");
+  const day = moment({}).format("YYYY. MM. DD");
 
   return (
     <>
       <CustomNavbar name="Likelion SKKU Notice" active={active} />
-      <div className="detail">
-        <Container>
-          <Row md={4}>
-            <Col>{details.id}</Col>
-            <Col xs={6}>{details.writer}</Col>
-            <Col>{details.date}</Col>
-          </Row>
-        </Container>
+      <div className="d-flex justify-content-center">
+        <Card
+          border="dark"
+          style={{ width: "800px", height: "auto", marginTop: "100px" }}
+        >
+          <Card.Header style={{ width: "800px" }}>
+            <h1 style={{ padding: "10px" }}>{details.title}</h1>
+            <SmallHeader>
+              {details.writer} &nbsp;&nbsp;&nbsp;&nbsp; {day}&nbsp;
+            </SmallHeader>
+          </Card.Header>
 
-        <Card>
-          <Card.Header>{details.title}</Card.Header>
-          <Card.Body>
+          <Card.Body style={{ padding: "30px" }}>
             <blockquote className="blockquote mb-0">
               <p> {details.body}</p>
             </blockquote>
           </Card.Body>
         </Card>
       </div>
+      <StyledFooter></StyledFooter>
     </>
   );
 }
+
+const Body = styled.div``;
+
+const SmallHeader = styled.div`
+  text-align: right;
+`;
 
 export default Detail;

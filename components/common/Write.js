@@ -3,6 +3,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import {authenticate, getUser} from "../../public/auth";
+import {Button} from "react-bootstrap";
 import axios from "axios";
 
 const isNoticeValid = async (category) => {
@@ -10,7 +11,7 @@ const isNoticeValid = async (category) => {
     const {data:categories} = await axios.get("/api/category");
     if (categories.map((elem)=>elem.title).indexOf(category)<0) return false;
     return true;
-}
+};
 
 export default function Write(props) {
   const [categories, setCategories] = useState([]);
@@ -45,6 +46,7 @@ export default function Write(props) {
   }, []);
 
   return (
+    <Layout>
     <article>
       <h2>{props.title}</h2>
 
@@ -82,7 +84,7 @@ export default function Write(props) {
         }}
       >
         <Dropdown>
-          <Dropdown.Toggle variant="success" id="dropdown-basic" size="sm">
+          <Dropdown.Toggle variant="dark" style={{width:"300px", marginBottom:"2px"}} id="dropdown-basic" size="sm">
             {usingCategory}
           </Dropdown.Toggle>
 
@@ -99,6 +101,7 @@ export default function Write(props) {
         </Dropdown>
         <p>
           <input
+          style={{width:"800px"}}
             type="text"
             name="title"
             placeholder="제목"
@@ -108,6 +111,7 @@ export default function Write(props) {
         </p>
         <p>
           <textarea
+            style={{width:"800px", height:"700px"}}
             name="body"
             placeholder="내용을 입력하세요"
             value={body}
@@ -115,9 +119,17 @@ export default function Write(props) {
           ></textarea>
         </p>
         <p>
-          <input type="submit" value="저장"></input>
+        <Button variant="dark" type="submit">
+          새 글 작성
+        </Button>
         </p>
       </form>
     </article>
+    </Layout>
   );
-}
+};
+
+const Layout = styled.div`
+  max-width:1000px;
+  margin: 0 auto;
+`
