@@ -8,6 +8,18 @@
   },
 };
 
+// module.exports = {
+//   async redirects() {
+//     return [
+//       {
+//         source: '/login',
+//         destination: '/',
+//         permanent: true,
+//       },
+//     ]
+//   },
+// };
+
 const nextConfig = {
   reactStrictMode: true,
   async rewrites() {

@@ -5,12 +5,14 @@ import CustomNavbar from "../components/common/Navbar";
 import Admin from "./admin";
 import { useSession, signIn, signOut } from "next-auth/react";
 import React, { useState } from "react";
+import {useRouter} from "next/router";
 import axios from "axios";
 
 function LoginPage() {
   const { data: session } = useSession();
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
   if (session) {
     return (
       <>
@@ -29,7 +31,7 @@ function LoginPage() {
     .then((response)=>{
         if (response.data.loginSuccess === true){
             alert("로그인 성공!!");
-            //리다이렉션 필요!!!!!
+            router.push("/");
         } else {
             alert(response.data.message); //에러 정보를 alert해줌
         };
