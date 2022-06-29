@@ -16,11 +16,15 @@ function Pagination({ total, limit, page, setPage }) {
               key={i + 1}
               onClick={() => setPage(i + 1)}
               aria-current={page === i + 1 ? "page" : null}
+              style={{ backgroundColor: "#FF9E1B", border: "white" }}
             >
               {i + 1}
             </Button>
           ))}
-        <Button onClick={() => setPage(page + 1)} disabled={page === numPages}>
+        <Button
+          onClick={() => setPage(page + 1)}
+          disabled={page === numPages}
+        >
           &gt;
         </Button>
       </Nav>
