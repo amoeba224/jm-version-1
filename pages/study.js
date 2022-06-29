@@ -19,7 +19,7 @@ export default function Home() {
   const offset = (page - 1) * limit;
 
   const getNotice = async () => {
-    const { data } = await axios.get("api/notice");
+    const { data } = await axios.get("/api/notice");
     const usingData = data
       .filter((curData) => {
         return curData.category === "스터디";
@@ -36,7 +36,7 @@ export default function Home() {
     const { data } = await axios.get("api/notice");
     const usingData = data
       .filter((curData) => {
-        return curData.category === "중앙";
+        return curData.category === "스터디";
       })
       .sort(function (a, b) {
         return new Date(b.date) - new Date(a.date);

@@ -20,11 +20,13 @@ export default function Home() {
   const getNotice = async () => {
     const { data } = await axios.get("/api/notice");
     const usingData = data
+      .filter((item)=>(item.category === category || category === "전체"))
       .sort(function (a, b) {
         return new Date(b.date) - new Date(a.date);
       });
 
     setNotices(usingData);
+    return usingData;
   };
 
   const getCategories = async () => {

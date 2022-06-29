@@ -33,10 +33,10 @@ export default function Home() {
 
   const updateNotice = async (e) => {
     e.preventDefault();
-    const { data } = await axios.get("api/notice");
+    const { data } = await axios.get("/api/notice");
     const usingData = data
       .filter((curData) => {
-        return curData.category === "중앙";
+        return curData.category === "성대";
       })
       .sort(function (a, b) {
         return new Date(b.date) - new Date(a.date);
