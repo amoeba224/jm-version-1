@@ -11,7 +11,7 @@ export default function Create(props) {
   return (
     <>
       <AdminNavbar name="Likelion SKKU Notice Admin" active={active} />
-      <Write title="새 공지 작성"></Write>
+      <Write title="새 공지 작성" mode="create"></Write>
     </>
   )
 }

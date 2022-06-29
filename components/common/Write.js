@@ -66,10 +66,18 @@ export default function Write(props) {
               category:usingCategory,
               writer,
             };
-            axios.put(`/api/notice/${props.props}`, notice).then(()=>{
-              alert("성공적으로 업로드했습니다.");
-              router.push("/admin/edit");
-            }).catch((err)=>console.log(err))
+            if (props.props){
+              axios.put(`/api/notice/${props.props}`, notice).then(()=>{
+                alert("성공적으로 업로드했습니다.");
+                router.push("/admin/edit");
+              });
+            } else {
+              axios.post("/api/notice", notice).then(()=>{
+                alert("성공적으로 업로드했습니다.");
+                router.push("/admin/edit");
+              });
+            };
+            
           })
         }}
       >
