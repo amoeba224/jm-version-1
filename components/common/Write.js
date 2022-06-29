@@ -5,10 +5,7 @@ import { useRouter } from "next/router";
 import {authenticate, getUser} from "../../public/auth";
 import axios from "axios";
 
-const isNoticeValid = async (writer, category) => {
-    //존재하는 유저를 사용하는지 확인
-    const {data:users} = await axios.get("/api/user");
-    if (users.map((user)=>user.name).indexOf(writer) < 0) return false;
+const isNoticeValid = async (category) => {
     //존재하는 카테고리를 사용하는지 확인
     const {data:categories} = await axios.get("/api/category");
     if (categories.map((elem)=>elem.title).indexOf(category)<0) return false;
@@ -57,7 +54,7 @@ export default function Write(props) {
           const title = event.target.title.value;
           const body = event.target.body.value;
           const writer = "Master";
-          isNoticeValid(writer, usingCategory)
+          isNoticeValid(usingCategory)
           .then((res)=>{
             if (res === false){
               alert("유효하지 않은 요청입니다.")
