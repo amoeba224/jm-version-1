@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Likelion from '../public/likelionuniv.png';
 import SKKU from '../public/skku.jpg';
 import Bgimg from '../public/bgimg1.jpg';
-
+import StyledFooter from '../components/common/Footer';
 import Carousel from 'react-bootstrap/Carousel';
 
 function UncontrolledExample() {
@@ -14,36 +14,32 @@ function UncontrolledExample() {
     <>
       <CustomNavbar name="Likelion SKKU Notice"/>
       <Box>
-        <h1>멋사 공지를 한 눈에!</h1>
+        <h1>멋사 공지 한눈에!</h1>
         <h4>여러가지 공지를 모두 확인하세요.</h4>
-        <br></br>
-        <br></br>
+        <p></p>
         <SizedCarousel>
           <Carousel>
             <Carousel.Item>
               <Image src={Likelion} alt="center"/>
               <Carousel.Caption>
                 <h3>중앙 공지</h3>
-                <p>중앙 공지 내용</p>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
             <Image src={SKKU} alt="skku"/>
               <Carousel.Caption>
                 <h3>성대 공지</h3>
-                <p>성대 공지 내용</p>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
             <Image src={Bgimg} alt="study"/>
               <Carousel.Caption>
                 <h3>스터디 공지</h3>
-                <p>스터디 공지 내용</p>
               </Carousel.Caption>
             </Carousel.Item>
           </Carousel>
         </SizedCarousel>
-      
+        <StyledFooter></StyledFooter>
       </Box>
     </>
   );
@@ -54,11 +50,12 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-margin-top: 100px;`
+margin-top: 70px;`
 
 const SizedCarousel = styled.div`
-  width: 500px;
-  height: 200px;
+  width: 300px;
+  height: 380px;
   `
+
 
 export default UncontrolledExample;
