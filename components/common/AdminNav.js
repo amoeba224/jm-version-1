@@ -14,7 +14,10 @@ export default function AdminNavbar(props) {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    logout().then((res)=>console.log(res)).catch((err)=>console.log(err));
+    logout().then(()=>{
+      alert("로그아웃되었습니다.");
+      router.push("/");
+    }).catch((err)=>console.log(err));
   }
 
   switch(router.pathname) {

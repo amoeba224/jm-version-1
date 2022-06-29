@@ -10,6 +10,7 @@ import { getClientBuildManifest } from "next/dist/client/route-loader";
 import axios from "axios";
 
 
+
 function Detail() {
   
   const router = useRouter();

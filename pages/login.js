@@ -4,15 +4,23 @@ import Form from "react-bootstrap/Form";
 import CustomNavbar from "../components/common/Navbar";
 import Admin from "./admin";
 import { useSession, signIn, signOut } from "next-auth/react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {useRouter} from "next/router";
 import axios from "axios";
+import {authenticate} from "../public/auth";
 
 function LoginPage() {
   const { data: session } = useSession();
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+  useEffect(()=>{
+    authenticate().then((res)=>{
+      if (res === true) {
+        router.push("/");
+      };
+    })
+  }, []);
   if (session) {
     return (
       <>
@@ -20,7 +28,6 @@ function LoginPage() {
       </>
     );
   }
-
   const handleSubmit = (e) => {
     e.preventDefault();
     let body = {

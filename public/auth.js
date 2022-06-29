@@ -2,7 +2,11 @@ import axios from "axios";
 
 export const authenticate = async () => {
     const result = await axios.get("/api/user/auth");
-    return result.data.authenticated
+    if (result.data.authenticated) {
+        return result.data.authenticated
+    } else {
+        return false
+    };
 };
 
 export const logout = async () => {

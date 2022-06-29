@@ -1,7 +1,8 @@
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import styled from "@emotion/styled";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import {authenticate} from "../../public/auth";
 
 const StyledNavbar = styled(Navbar)`
   padding: 15px 0;
@@ -9,6 +10,7 @@ const StyledNavbar = styled(Navbar)`
 
 export default function CustomNavbar(props) {
   const router = useRouter();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   let { jungangActive, skkuActive, studyActive } = false;
 
   switch(router.pathname) {
@@ -23,7 +25,17 @@ export default function CustomNavbar(props) {
       break;
     default:
       break;
-  }
+  };
+
+  useEffect(()=>{
+    authenticate().then((res)=>{
+      if (res === true) {
+        setIsAuthenticated(true);
+      } else {
+        setIsAuthenticated(false);
+      };
+    })
+  }, []);
 
       
   return (
@@ -38,7 +50,7 @@ export default function CustomNavbar(props) {
             <Nav.Link href="/study" active={studyActive}>스터디</Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link href="/login">Login</Nav.Link>
+            {isAuthenticated? <Nav.Link href="/admin">Admin</Nav.Link>: <Nav.Link href="/login">Login</Nav.Link>}
           </Nav>
         </Navbar.Collapse>
       </Container>

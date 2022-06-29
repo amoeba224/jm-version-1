@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Stack, Container, Row, Col, Form } from "react-bootstrap";
 import axios from "axios";
 import {authenticate} from "../../../public/auth";
+import {useRouter} from "next/router";
 
 
 const categoryButton = (handleDelete, category) => {
@@ -27,8 +28,7 @@ const categoryButton = (handleDelete, category) => {
 export default function Category() {
   const [categories, setCategories] = useState([]);
   const [input, setInput] = useState("");
-
-
+  const router = useRouter();
 
   const getCategories = async () => {
     const { data } = await axios.get("/api/category");
@@ -59,10 +59,8 @@ export default function Category() {
 
   useEffect(() => {
     authenticate().then((res)=>{
-      if (res) {
-        console.log("인증되었습니다.")
-      } else {
-        alert("인증정보가 없습니다. 홈페이지로 리다이렉트합니다.")
+      if (res === false) {
+        router.push("/");
       }
     });
     getCategories();
