@@ -1,28 +1,21 @@
 import PropTypes from "prop-types";
 import Link from "next/link";
 import { Stack, Container, Row, Col } from "react-bootstrap";
+import moment from 'moment';
+import 'moment/locale/ko';
+
 function NoticeList({ id, title, category, date, writer }) {
+  const rowHeight = 50;
+  const day = moment(date).format('YYYY. MM. DD');
   return (
     <div>
       <Stack gap={3}>
         <div className="bg-light border">
           <Container>
-            <Row>
-              <Col xs={6} md={4}>
-                {category}
-              </Col>
-              <Col xs={12} md={8}>
-                <Link href={`${id}`}>
-                  <a>{title}</a>
-                </Link>
-              </Col>
-            </Row>
-            <Row>
-              <Row md={4}>
-                <Col>{id}</Col>
-                <Col xs={6}>{writer}</Col>
-                <Col>{date}</Col>
-              </Row>
+            <Row rowSpacing={1}>
+              <Col><Link href={`${id}`}>{title}</Link></Col>
+              <Col>{writer}</Col>
+              <Col>{day}</Col>
             </Row>
           </Container>
         </div>
@@ -37,5 +30,6 @@ NoticeList.propTypes = {
   writer: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
 };
+
 
 export default NoticeList;

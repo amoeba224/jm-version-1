@@ -32,6 +32,7 @@ export default function CustomNavbar(props) {
 
   useEffect(()=>{
     authenticate().then((res)=>{
+      console.log(res);
       if (res === true) {
         setIsAuthenticated(true);
       } else {
@@ -42,14 +43,14 @@ export default function CustomNavbar(props) {
 
       
   return (
-    <StyledNavbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <StyledNavbar collapseOnSelect expand="lg" variant="dark">
       <Container>
       <Navbar.Brand href="/"><Image src={Logo} alt="logo" width={(566.28/142)*70} height={70} margin={0} padding={0}/></Navbar.Brand>
-        <Navbar.Brand href="#home">{props.name}</Navbar.Brand>
+        <Navbar.Brand href="#home"></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/" active={jungangActive}>중앙</Nav.Link>
+            <Nav.Link href="/center" active={jungangActive}>중앙</Nav.Link>
             <Nav.Link href="/skku" active={skkuActive}>성대</Nav.Link>
             <Nav.Link href="/study" active={studyActive}>스터디</Nav.Link>
           </Nav>

@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CustomNavbar from '../components/common/Navbar'
 import NoticeList from "../components/common/NoticeList";
-import { Stack, Container, Row, Col, Button } from "react-bootstrap";
+import { Stack, Container, Row, Col, Button, Form } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import axios from "axios"
 import Pagination from '../components/common/Pagination';
@@ -13,30 +13,66 @@ import BgImg from '../public/bgimg1.jpg';
 export default function Home() {
   const [active, setActive] = useState("전체");
   const [notices, setNotices] = useState([]);
-  const [category, setCategory] = useState("center");
+  const [searchInput, setSearchInput] = useState("");
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit; 
 
   const getNotice = async () => {
     const { data } = await axios.get("api/notice");
-    const usingData = data.filter((item) => {
-      if (category === "center") return true;
-      if (category === item.category) return true;
+    const usingData = data
+      .filter((curData) => {
+        return curData.category === "스터디";
+      })
+      .sort(function (a, b) {
+        return new Date(b.date) - new Date(a.date);
+      });
 
-      return false;
-    });
     setNotices(usingData);
   };
 
-  useEffect(() => {
+  const updateNotice = async (e) => {
+    e.preventDefault();
+    const { data } = await axios.get("api/notice");
+    const usingData = data
+      .filter((curData) => {
+        return curData.category === "중앙";
+      })
+      .sort(function (a, b) {
+        return new Date(b.date) - new Date(a.date);
+      });
+    setNotices(
+      usingData.filter((notice) => notice.title.indexOf(searchInput) >= 0)
+    );
+  };
+
+useEffect(() => {
     getNotice();
-  // eslint-disable-next-lingie react-hooks/exhaustive-deps
-  }, [category]);
+  }, []);
+
+
 
   return (
     <>
       <CustomNavbar name="Likelion SKKU Notice" active={active} />
+      <Form>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>검색창</Form.Label>
+        <Form.Control
+          onChange={(e) => setSearchInput(e.target.value)}
+          type="text"
+          placeholder="Search title"
+        />
+      </Form.Group>
+      <Button
+        variant="primary"
+        type="submit"
+        value="제출"
+        onClick={(e) => updateNotice(e)}
+      >
+        검색
+      </Button>
+    </Form>
       <Pictures>
         <Picture src={BgImg}></Picture>
       </Pictures>
