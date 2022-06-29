@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import Dropdown from "react-bootstrap/Dropdown";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import {authenticate} from "../../public/auth";
 import axios from "axios";
 
 const isNoticeValid = async (writer, category) => {
@@ -19,7 +20,7 @@ export default function Write(props) {
   const [usingCategory, setUsingCategory] = useState("카테고리");
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [valid, setValid] = useState(false);
+  const router = useRouter();
 
   const getCategories = async () => {
     const { data } = await axios.get("/api/category");
@@ -27,6 +28,11 @@ export default function Write(props) {
   };
 
   useEffect(() => {
+    authenticate().then((res)=>{
+      if (!res) {
+        router.push("/");
+      }
+    });
     getCategories();
     if (props.props) {
       axios
@@ -38,10 +44,8 @@ export default function Write(props) {
           setBody(data.body);
         })
         .catch((err) => console.log(err));
-    }
+    };
   }, []);
-
-  useEffect(()=>console.log(valid), [valid])
 
   return (
     <article>
@@ -52,21 +56,24 @@ export default function Write(props) {
           event.preventDefault();
           const title = event.target.title.value;
           const body = event.target.body.value;
-          const category = usingCategory;
           const writer = "문태주";
-          isNoticeValid(writer, category).then((res)=>setValid(res));
-          if (valid === false){
-            alert("유효하지 않은 요청입니다.")
-            return;
-          }
-          const notice = {
-            title,
-            body,
-            category,
-            writer,
-          };
-          axios.post("/api/notice", notice).then(()=>alert("성공적으로 업로드했습니다.")).catch((err)=>console.log(err))
-          //redirection
+          isNoticeValid(writer, usingCategory)
+          .then((res)=>{
+            if (res === false){
+              alert("유효하지 않은 요청입니다.")
+              return;
+            }
+            const notice = {
+              title,
+              body,
+              category:usingCategory,
+              writer,
+            };
+            axios.post("/api/notice", notice).then(()=>{
+              alert("성공적으로 업로드했습니다.");
+              router.push("/admin/edit");
+            }).catch((err)=>console.log(err))
+          })
         }}
       >
         <Dropdown>

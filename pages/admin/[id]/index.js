@@ -4,13 +4,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { getClientBuildManifest } from "next/dist/client/route-loader";
 import axios from "axios";
 import AdminNavbar from './../../../components/common/AdminNav';
-
+import {authenticate} from "../../../public/auth";
 
 function Detail() {
-  
   const router = useRouter();
   const { id } = router.query;
   const [details, setDetails] = useState({});
@@ -18,15 +16,27 @@ function Detail() {
   const getById = async (id) => {
     const { data } = await axios.get(`/api/notice/${id}`);
     await setDetails(data);
-    console.log(details);
   };
 
   const handleDelete = async (id) => {
-    const result = await axios.delete(`/api/notice/${id}`);
-    console.log(result);
+    await axios.delete(`/api/notice/${id}`);
+    alert("게시글을 삭제했습니다.")
+    router.push("/admin/edit");
   }
+  useEffect(()=>{
+    authenticate().then((res)=>{
+      if (res === false) {
+        router.push("/");
+      }
+    });
+  }, []);
 
-  useEffect(()=>{getById(id)}, [id]);
+
+  useEffect(()=>{
+    getById(id)
+  }, [id]);
+
+  
 
   const [active, setActive] = useState("전체");
 
