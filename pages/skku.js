@@ -76,8 +76,7 @@ useEffect(() => {
       </Pictures>
       <h1>성대 멋사 공지</h1>
       <Layout>
-        <Stack gap={3}>
-          <div className="bg-light border">
+          <div>
             <div>
               {notices.slice(offset, offset + limit).map((notice) => (
                 <NoticeList
@@ -92,7 +91,6 @@ useEffect(() => {
               ))}
             </div>
           </div>
-        </Stack>
         <label>
         페이지 당 표시할 게시물 수:&nbsp;
           <select
