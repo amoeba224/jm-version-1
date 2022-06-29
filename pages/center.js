@@ -7,7 +7,7 @@ import axios from "axios"
 import Pagination from '../components/common/Pagination';
 import styled from '@emotion/styled';
 import Picture from '../components/common/Picture';
-import BgImg from '../public/bgimg1.jpg';
+import Likelion from '../public/likelionuniv.png';
 
 
 export default function Home() {
@@ -38,9 +38,9 @@ export default function Home() {
     <>
       <CustomNavbar name="Likelion SKKU Notice" active={active} />
       <Pictures>
-        <Picture src={BgImg}></Picture>
+        <Picture src={Likelion}></Picture>
       </Pictures>
-      <h1>스터디 공지</h1>
+      <h1>중앙 멋사 공지</h1>
       <Layout>
         <Stack gap={3}>
           <div className="bg-light border">
