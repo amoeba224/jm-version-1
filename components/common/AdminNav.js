@@ -44,6 +44,7 @@ export default function AdminNavbar(props) {
           <Nav className="me-auto">
             <Nav.Link href="/admin" active={mainActive}>Dashboard</Nav.Link>
             <Nav.Link href="/admin/edit" active={editActive}>Edit</Nav.Link>
+            <Nav.Link href="/admin/category" active={editActive}>Category</Nav.Link>
           </Nav>
           <Nav>
             <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
