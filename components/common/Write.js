@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import Dropdown from "react-bootstrap/Dropdown";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import {authenticate} from "../../public/auth";
+import {authenticate, getUser} from "../../public/auth";
 import axios from "axios";
 
 const isNoticeValid = async (writer, category) => {
@@ -56,7 +56,7 @@ export default function Write(props) {
           event.preventDefault();
           const title = event.target.title.value;
           const body = event.target.body.value;
-          const writer = "문태주";
+          const writer = "Master";
           isNoticeValid(writer, usingCategory)
           .then((res)=>{
             if (res === false){
@@ -69,7 +69,7 @@ export default function Write(props) {
               category:usingCategory,
               writer,
             };
-            axios.post("/api/notice", notice).then(()=>{
+            axios.put(`/api/notice/${props.props}`, notice).then(()=>{
               alert("성공적으로 업로드했습니다.");
               router.push("/admin/edit");
             }).catch((err)=>console.log(err))
