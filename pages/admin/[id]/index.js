@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
@@ -65,6 +66,7 @@ function Detail() {
     </>
   );
 }
+
 
 export default Detail;
 

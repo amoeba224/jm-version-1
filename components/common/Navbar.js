@@ -3,9 +3,12 @@ import styled from "@emotion/styled";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import {authenticate} from "../../public/auth";
+import Image from 'next/image';
+import Logo from '../../public/Logo.png';
 
 const StyledNavbar = styled(Navbar)`
-  padding: 15px 0;
+  padding: 0;
+  background-color: #000000;
 `;
 
 export default function CustomNavbar(props) {
@@ -14,7 +17,7 @@ export default function CustomNavbar(props) {
   let { jungangActive, skkuActive, studyActive } = false;
 
   switch(router.pathname) {
-    case "/":
+    case "/center":
       jungangActive = true;
       break;
     case "/skku":
@@ -41,6 +44,7 @@ export default function CustomNavbar(props) {
   return (
     <StyledNavbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
+      <Navbar.Brand href="/"><Image src={Logo} alt="logo" width={(566.28/142)*70} height={70} margin={0} padding={0}/></Navbar.Brand>
         <Navbar.Brand href="#home">{props.name}</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
