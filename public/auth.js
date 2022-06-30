@@ -20,7 +20,5 @@ export const logout = async () => {
 
 export const getUser = async () => {
     const result = await axios.get("/api/user/auth");
-    console.log("here")
-    console.log(result.name);
     return result?.data.name
 }

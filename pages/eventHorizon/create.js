@@ -8,7 +8,6 @@ import styled from "@emotion/styled";
 
 export default function Create(props) {
   const [active, setActive] = useState("전체");
-  console.log(props)
   return (
     <>
       <AdminNavbar name="Likelion SKKU Notice Admin" active={active} />

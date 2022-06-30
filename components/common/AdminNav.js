@@ -17,17 +17,17 @@ export default function AdminNavbar(props) {
     logout().then(()=>{
       alert("로그아웃되었습니다.");
       router.push("/");
-    }).catch((err)=>console.log(err));
+    }).catch((err)=>alert("유효하지 않은 요청입니다."));
   }
 
   switch(router.pathname) {
-    case "/admin":
+    case "/eventHorizon":
       mainActive = true;
       break;
-    case "/admin/create":
+    case "/eventHorizon/create":
       createActive = true;
       break;
-    case "/admin/edit":
+    case "/eventHorizon/edit":
       editActive = true;
       break;
     default:
@@ -42,9 +42,9 @@ export default function AdminNavbar(props) {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/admin" active={mainActive}>Dashboard</Nav.Link>
-            <Nav.Link href="/admin/edit" active={editActive}>Edit</Nav.Link>
-            <Nav.Link href="/admin/category" active={editActive}>Category</Nav.Link>
+            <Nav.Link href="/eventHorizon" active={mainActive}>Dashboard</Nav.Link>
+            <Nav.Link href="/eventHorizon/edit" active={editActive}>Edit</Nav.Link>
+            <Nav.Link href="/eventHorizon/category" active={editActive}>Category</Nav.Link>
           </Nav>
           <Nav>
             <Nav.Link onClick={handleLogout}>Logout</Nav.Link>

@@ -41,7 +41,7 @@ export default function Write(props) {
           setTitle(data.title);
           setBody(data.body);
         })
-        .catch((err) => console.log(err));
+        .catch(() => alert("오류가 발생했습니다.."));
     };
   }, []);
 
@@ -71,12 +71,12 @@ export default function Write(props) {
             if (props.props){
               axios.put(`/api/notice/${props.props}`, notice).then(()=>{
                 alert("성공적으로 업로드했습니다.");
-                router.push("/admin/edit");
+                router.push("/eventHorizon/edit");
               });
             } else {
               axios.post("/api/notice", notice).then(()=>{
                 alert("성공적으로 업로드했습니다.");
-                router.push("/admin/edit");
+                router.push("/eventHorizon/edit");
               });
             };
             

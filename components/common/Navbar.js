@@ -54,7 +54,7 @@ export default function CustomNavbar(props) {
             <Nav.Link href="/study" active={studyActive}>스터디</Nav.Link>
           </Nav>
           <Nav>
-            {isAuthenticated? <Nav.Link href="/admin">Admin</Nav.Link>: <Nav.Link href="/login">Login</Nav.Link>}
+            {isAuthenticated? <Nav.Link href="/eventHorizon">Admin</Nav.Link>: <Nav.Link href="/login">Login</Nav.Link>}
           </Nav>
         </Navbar.Collapse>
       </Container>
