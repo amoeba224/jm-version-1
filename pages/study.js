@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Pagination from "../components/common/Pagination";
 import styled from "@emotion/styled";
-import center from "../public/center.jpg";
+import study from "../public/study.jpg";
 import StyledFooter from "../components/common/Footer";
 import Image from "next/image";
 
@@ -67,10 +67,10 @@ export default function Home() {
       <CustomNavbar name="Likelion SKKU Notice" active={active} />
       <StyledHeader id="styledHeader">
         <Pictures>
-          <StyledImage src={center} alt="backgroundImage"></StyledImage>
+          <StyledImage src={study} alt="backgroundImage"></StyledImage>
         </Pictures>
         <StyledText>
-          <h1>LIKELION UNIV.</h1>
+          <h1>WEB PROGRAMMING STUDY</h1>
         </StyledText>
       </StyledHeader>
       <Form
