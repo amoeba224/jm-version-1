@@ -45,9 +45,9 @@ function Detail() {
   const day = moment({}).format("YYYY. MM. DD");
 
   return (
-    <>
+    <StyledBody>
       <CustomNavbar name="Likelion SKKU Notice" active={active} />
-      <div className="d-flex justify-content-center">
+      <CardContainer>
         <Card
           border="dark"
           className="cardClass"
@@ -76,15 +76,28 @@ function Detail() {
             </blockquote>
           </Card.Body>
         </Card>
-      </div>
-      {/*determine if the detail's long with counting enters */}
-      <StyledFooter isNoticeLong={details.body?.split("\n").length>15}></StyledFooter>
-    </>
+      </CardContainer>
+      <StyledFooter />
+    </StyledBody>
   );
 }
 
 const SmallHeader = styled.div`
   text-align: right;
 `;
+
+const CardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 150px;
+`
+
+const StyledBody = styled.div`
+  position: relative;
+  min-height: 100vh;
+
+`
 
 export default Detail;
