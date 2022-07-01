@@ -12,7 +12,7 @@ import Link from "next/link";
 
 function UncontrolledExample() {
   return (
-    <>
+    <StyledBody>
       <CustomNavbar name="Likelion SKKU Notice" />
       <Box>
         <h1>멋사 공지 한눈에!</h1>
@@ -48,9 +48,15 @@ function UncontrolledExample() {
         </SizedCarousel>
         <StyledFooter></StyledFooter>
       </Box>
-    </>
+    </StyledBody>
   );
 }
+
+const StyledBody = styled.div`
+  display:flex; 
+  flex-direction:column; 
+  height: 100vh;
+`
 
 const Box = styled.div`
   display: flex;
