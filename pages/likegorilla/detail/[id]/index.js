@@ -1,12 +1,11 @@
 import { useRouter } from "next/router";
-import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import axios from "axios";
 import AdminNavbar from '../../../../components/common/AdminNav';
-import {authenticate, getUser} from "../../../../public/auth";
+import {authenticate} from "../../../../public/auth";
 
 function Detail() {
   const router = useRouter();

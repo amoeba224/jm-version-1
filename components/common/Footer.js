@@ -8,9 +8,7 @@ export default function Footer() {
       navigator.userAgent.toLowerCase().indexOf("ios") > 0
     ) {
       document.getElementById("styledFooter").style.position = "relative"
-    } else {
-      document.getElementById("styledFooter").style.position = "absolute"
-    }
+    };
   }, []);
 
   return (

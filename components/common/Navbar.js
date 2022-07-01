@@ -1,4 +1,4 @@
-import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
+import { Navbar, Container, Nav } from "react-bootstrap";
 import styled from "@emotion/styled";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
