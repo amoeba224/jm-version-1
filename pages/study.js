@@ -1,12 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import CustomNavbar from "../components/common/Navbar";
 import NoticeList from "../components/common/NoticeList";
-import { Button, Form } from "react-bootstrap";
+import { Stack, Container, Row, Col, Button, Form } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Pagination from "../components/common/Pagination";
 import styled from "@emotion/styled";
-import study from "../public/study.jpg";
+import center from "../public/center.jpg";
 import StyledFooter from "../components/common/Footer";
 import Image from "next/image";
 
@@ -33,7 +33,7 @@ export default function Home() {
 
   const updateNotice = async (e) => {
     e.preventDefault();
-    const { data } = await axios.get("api/notice");
+    const { data } = await axios.get("/api/notice");
     const usingData = data
       .filter((curData) => {
         return curData.category === "스터디";
@@ -50,22 +50,34 @@ export default function Home() {
     getNotice();
   }, []);
 
+  useEffect(() => {
+    if (
+      navigator.userAgent.toLowerCase().indexOf("android") > 0 ||
+      navigator.userAgent.toLowerCase().indexOf("ios") > 0
+    ) {
+      document.getElementById("inputBox").style.width="250px";
+      document.getElementById("styledHeader").style.marginTop = "30px";
+      document.getElementById("styledHeader").style.marginRight = "10px";
+      document.getElementById("styledHeader").style.marginLeft = "10px";
+    }
+  }, []);
+
   return (
     <>
       <CustomNavbar name="Likelion SKKU Notice" active={active} />
-      <StyledHeader>
+      <StyledHeader id="styledHeader">
         <Pictures>
-          <StyledImage src={study} alt="backgroundImage"></StyledImage>
+          <StyledImage src={center} alt="backgroundImage"></StyledImage>
         </Pictures>
         <StyledText>
-          <h1>WEB PROGRAMMING STUDY</h1>
+          <h1>LIKELION UNIV.</h1>
         </StyledText>
       </StyledHeader>
       <Form
         className="panel mt-5 mb-5 align-middle d-flex justify-content-center
         "
       >
-        <Form.Group controlId="formBasicEmail" style={{ width: "700px" }}>
+        <Form.Group controlId="formBasicEmail" id="inputBox" style={{ width: "700px" }}>
           <Form.Control
             onChange={(e) => setSearchInput(e.target.value)}
             type="text"
@@ -131,6 +143,7 @@ const Layout = styled.div`
   align-items: center;
   max-width: 800px;
   margin: 0 auto;
+  margin-bottom: 20px;
 `;
 const Pictures = styled.div`
   display: flex;

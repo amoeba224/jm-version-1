@@ -105,7 +105,7 @@ export default function Home() {
             검색
           </Button>
         </Form>
-        <Button variant="dark" href="/admin/create">
+        <Button variant="dark" href="/likegorilla/create">
           새 글 작성
         </Button>
         <Layout>

@@ -5,8 +5,8 @@ import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import axios from "axios";
-import AdminNavbar from '../../../components/common/AdminNav';
-import {authenticate, getUser} from "../../../public/auth";
+import AdminNavbar from '../../../../components/common/AdminNav';
+import {authenticate, getUser} from "../../../../public/auth";
 
 function Detail() {
   const router = useRouter();

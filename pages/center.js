@@ -19,7 +19,7 @@ export default function Home() {
   const offset = (page - 1) * limit;
 
   const getNotice = async () => {
-    const { data } = await axios.get("api/notice");
+    const { data } = await axios.get("/api/notice");
     const usingData = data
       .filter((curData) => {
         return curData.category === "중앙";
@@ -33,7 +33,7 @@ export default function Home() {
 
   const updateNotice = async (e) => {
     e.preventDefault();
-    const { data } = await axios.get("api/notice");
+    const { data } = await axios.get("/api/notice");
     const usingData = data
       .filter((curData) => {
         return curData.category === "중앙";
@@ -50,10 +50,22 @@ export default function Home() {
     getNotice();
   }, []);
 
+  useEffect(() => {
+    if (
+      navigator.userAgent.toLowerCase().indexOf("android") > 0 ||
+      navigator.userAgent.toLowerCase().indexOf("ios") > 0
+    ) {
+      document.getElementById("inputBox").style.width="220px";
+      document.getElementById("styledHeader").style.marginTop = "30px";
+      document.getElementById("styledHeader").style.marginRight = "10px";
+      document.getElementById("styledHeader").style.marginLeft = "10px";
+    }
+  }, []);
+
   return (
     <>
       <CustomNavbar name="Likelion SKKU Notice" active={active} />
-      <StyledHeader>
+      <StyledHeader id="styledHeader">
         <Pictures>
           <StyledImage src={center} alt="backgroundImage"></StyledImage>
         </Pictures>
@@ -65,7 +77,7 @@ export default function Home() {
         className="panel mt-5 mb-5 align-middle d-flex justify-content-center
         "
       >
-        <Form.Group controlId="formBasicEmail" style={{ width: "700px" }}>
+        <Form.Group controlId="formBasicEmail" id="inputBox" style={{ width: "700px" }}>
           <Form.Control
             onChange={(e) => setSearchInput(e.target.value)}
             type="text"
@@ -131,6 +143,7 @@ const Layout = styled.div`
   align-items: center;
   max-width: 800px;
   margin: 0 auto;
+  margin-bottom: 20px;
 `;
 const Pictures = styled.div`
   display: flex;

@@ -23,6 +23,20 @@ function Detail() {
     getById(id);
   }, [id]);
 
+  useEffect(() => {
+    if (
+      navigator.userAgent.toLowerCase().indexOf("android") > 0 ||
+      navigator.userAgent.toLowerCase().indexOf("ios") > 0
+    ) {
+      document.querySelectorAll(".cardClass").forEach((item) => {
+        item.style.width = "100%";
+        item.style.marginTop = "30px";
+        item.style.marginLeft = "5px";
+        item.style.marginRight = "5px";
+      });
+    };
+  }, []);
+
   const [active, setActive] = useState("전체");
   const day = moment({}).format("YYYY. MM. DD");
 
@@ -32,9 +46,11 @@ function Detail() {
       <div className="d-flex justify-content-center">
         <Card
           border="dark"
+          className="cardClass"
+          id="cardBox"
           style={{ width: "800px", height: "auto", marginTop: "100px" }}
         >
-          <Card.Header style={{ width: "800px" }}>
+          <Card.Header className="cardClass" style={{ width: "800px" }}>
             <h1 style={{ padding: "10px" }}>{details.title}</h1>
             <SmallHeader>
               {details.writer} &nbsp;&nbsp;&nbsp;&nbsp; {day}&nbsp;

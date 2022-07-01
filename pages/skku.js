@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Pagination from "../components/common/Pagination";
 import styled from "@emotion/styled";
-import skkuHeader from "../public/skkuHeader.jpg";
+import center from "../public/center.jpg";
 import StyledFooter from "../components/common/Footer";
 import Image from "next/image";
 
@@ -19,7 +19,7 @@ export default function Home() {
   const offset = (page - 1) * limit;
 
   const getNotice = async () => {
-    const { data } = await axios.get("api/notice");
+    const { data } = await axios.get("/api/notice");
     const usingData = data
       .filter((curData) => {
         return curData.category === "성대";
@@ -50,22 +50,34 @@ export default function Home() {
     getNotice();
   }, []);
 
+  useEffect(() => {
+    if (
+      navigator.userAgent.toLowerCase().indexOf("android") > 0 ||
+      navigator.userAgent.toLowerCase().indexOf("ios") > 0
+    ) {
+      document.getElementById("inputBox").style.width="250px";
+      document.getElementById("styledHeader").style.marginTop = "30px";
+      document.getElementById("styledHeader").style.marginRight = "10px";
+      document.getElementById("styledHeader").style.marginLeft = "10px";
+    }
+  }, []);
+
   return (
     <>
       <CustomNavbar name="Likelion SKKU Notice" active={active} />
-      <StyledHeader>
+      <StyledHeader id="styledHeader">
         <Pictures>
-          <StyledImage src={skkuHeader} alt="backgroundImage"></StyledImage>
+          <StyledImage src={center} alt="backgroundImage"></StyledImage>
         </Pictures>
         <StyledText>
-          <h1>LIKELION SKKU</h1>
+          <h1>LIKELION UNIV.</h1>
         </StyledText>
       </StyledHeader>
       <Form
         className="panel mt-5 mb-5 align-middle d-flex justify-content-center
         "
       >
-        <Form.Group controlId="formBasicEmail" style={{ width: "700px" }}>
+        <Form.Group controlId="formBasicEmail" id="inputBox" style={{ width: "700px" }}>
           <Form.Control
             onChange={(e) => setSearchInput(e.target.value)}
             type="text"
@@ -131,8 +143,8 @@ const Layout = styled.div`
   align-items: center;
   max-width: 800px;
   margin: 0 auto;
+  margin-bottom: 20px;
 `;
-
 const Pictures = styled.div`
   display: flex;
   justify-content: center;

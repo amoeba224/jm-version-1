@@ -20,13 +20,13 @@ export default function AdminNavbar(props) {
   }
 
   switch(router.pathname) {
-    case "/admin":
+    case "/likegorilla":
       mainActive = true;
       break;
-    case "/admin/create":
+    case "/likegorilla/create":
       createActive = true;
       break;
-    case "/admin/edit":
+    case "/likegorilla/edit":
       editActive = true;
       break;
     default:
@@ -41,9 +41,9 @@ export default function AdminNavbar(props) {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/admin" active={mainActive}>Dashboard</Nav.Link>
-            <Nav.Link href="/admin/edit" active={editActive}>Edit</Nav.Link>
-            <Nav.Link href="/admin/category" active={editActive}>Category</Nav.Link>
+            <Nav.Link href="/likegorilla" active={mainActive}>Dashboard</Nav.Link>
+            <Nav.Link href="/likegorilla/edit" active={editActive}>Edit</Nav.Link>
+            <Nav.Link href="/likegorilla/category" active={editActive}>Category</Nav.Link>
           </Nav>
           <Nav>
             <Nav.Link onClick={handleLogout}>Logout</Nav.Link>

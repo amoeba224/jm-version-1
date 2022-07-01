@@ -1,9 +1,20 @@
-import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import styled from "@emotion/styled";
+import { useEffect } from "react";
 
 export default function Footer() {
+  useEffect(() => {
+    if (
+      navigator.userAgent.toLowerCase().indexOf("android") > 0 ||
+      navigator.userAgent.toLowerCase().indexOf("ios") > 0
+    ) {
+      document.getElementById("styledFooter").style.position = "relative"
+    } else {
+      document.getElementById("styledFooter").style.position = "absolute"
+    }
+  }, []);
+
   return (
-    <StyledFooter>
+    <StyledFooter id="styledFooter">
       <p>
         &copy; Software Support Committee in SKKU 2022. All Rights Reserved.
       </p>
