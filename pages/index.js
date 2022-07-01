@@ -46,17 +46,17 @@ function UncontrolledExample() {
             </Carousel.Item>
           </Carousel>
         </SizedCarousel>
-        <StyledFooter></StyledFooter>
       </Box>
+      <StyledFooter></StyledFooter>
     </StyledBody>
   );
 }
 
 const StyledBody = styled.div`
-  display:flex; 
-  flex-direction:column; 
+  display: flex;
+  flex-direction: column;
   height: 100vh;
-`
+`;
 
 const Box = styled.div`
   display: flex;
