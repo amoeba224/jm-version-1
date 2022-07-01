@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import CustomNavbar from "../components/common/Navbar";
 import NoticeList from "../components/common/NoticeList";
-import { Stack, Container, Row, Col, Button, Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Pagination from "../components/common/Pagination";

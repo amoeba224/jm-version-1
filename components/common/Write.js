@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import Dropdown from "react-bootstrap/Dropdown";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import {authenticate, getUser} from "../../public/auth";
+import {authenticate} from "../../public/auth";
 import {Button} from "react-bootstrap";
 import axios from "axios";
 
@@ -41,7 +41,10 @@ export default function Write(props) {
           setTitle(data.title);
           setBody(data.body);
         })
-        .catch((err) => console.log(err));
+        .catch(() => {
+          alert("알 수 없는 오류가 발생했습니다.");
+          router.push("/");
+        });
     };
   }, []);
 
@@ -71,12 +74,12 @@ export default function Write(props) {
             if (props.props){
               axios.put(`/api/notice/${props.props}`, notice).then(()=>{
                 alert("성공적으로 업로드했습니다.");
-                router.push("/admin/edit");
+                router.push("/likegorilla/edit");
               });
             } else {
               axios.post("/api/notice", notice).then(()=>{
                 alert("성공적으로 업로드했습니다.");
-                router.push("/admin/edit");
+                router.push("/likegorilla/edit");
               });
             };
             

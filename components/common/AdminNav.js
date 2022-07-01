@@ -1,6 +1,5 @@
-import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
+import { Navbar, Container, Nav } from "react-bootstrap";
 import styled from "@emotion/styled";
-import { useState } from "react";
 import { useRouter } from "next/router";
 import {logout} from "../../public/auth";
 
@@ -17,7 +16,7 @@ export default function AdminNavbar(props) {
     logout().then(()=>{
       alert("로그아웃되었습니다.");
       router.push("/");
-    }).catch((err)=>console.log(err));
+    }).catch(()=>alert("작업을 실행하지 못했습니다."));
   }
 
   switch(router.pathname) {

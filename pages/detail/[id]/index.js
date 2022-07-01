@@ -1,12 +1,8 @@
 import { useRouter } from "next/router";
-import Link from "next/link";
-import Head from "next/head";
-import Image from "next/image";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Row, Col, Card } from "react-bootstrap";
-import CustomNavbar from "../../components/common/Navbar";
+import { Card } from "react-bootstrap";
+import CustomNavbar from "../../../components/common/Navbar";
 import { useState, useEffect } from "react";
-import { getClientBuildManifest } from "next/dist/client/route-loader";
 import axios from "axios";
 import styled from "@emotion/styled";
 import moment from "moment";
@@ -19,7 +15,7 @@ function Detail() {
   const [details, setDetails] = useState({});
 
   const getById = async (id) => {
-    const { data } = await axios.get(`api/notice/${id}`);
+    const { data } = await axios.get(`/api/notice/${id}`);
     await setDetails(data);
   };
 
@@ -56,8 +52,6 @@ function Detail() {
     </>
   );
 }
-
-const Body = styled.div``;
 
 const SmallHeader = styled.div`
   text-align: right;

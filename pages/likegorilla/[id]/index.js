@@ -5,7 +5,7 @@ import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import axios from "axios";
-import AdminNavbar from './../../../components/common/AdminNav';
+import AdminNavbar from '../../../components/common/AdminNav';
 import {authenticate, getUser} from "../../../public/auth";
 
 function Detail() {
@@ -21,12 +21,12 @@ function Detail() {
   const handleDelete = async (id) => {
     await axios.delete(`/api/notice/${id}`);
     alert("게시글을 삭제했습니다.")
-    router.push("/admin/edit");
+    router.push("/likegorilla/edit");
   }
   useEffect(()=>{
     authenticate().then((res)=>{
       if (res === false) {
-        router.push("/");
+        router.push("/login");
       }
     });
   }, []);
@@ -60,7 +60,7 @@ function Detail() {
             </blockquote>
           </Card.Body>
         </Card>
-        <Link href={`/admin/update/${id}`}><Button>수정</Button></Link>
+        <Link href={`/likegorilla/update/${id}`}><Button>수정</Button></Link>
         <Button onClick={()=>handleDelete(id)}>삭제</Button>
       </div>
     </>

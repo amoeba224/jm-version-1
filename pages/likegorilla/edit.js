@@ -56,7 +56,7 @@ export default function Home() {
   useEffect(() => {
     authenticate().then((res) => {
       if (res === false) {
-        router.push("/");
+        router.push("/login");
       }
     });
   }, []);

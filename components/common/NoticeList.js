@@ -20,7 +20,7 @@ function NoticeList({ id, title, category, date, writer }) {
 
   return (
     <>
-      <Link href={`${id}`} style={{ textDecoration: "none" }}>
+      <Link href={`detail/${id}`} style={{ textDecoration: "none" }}>
         <Stack gap={3}  style={{ marginBottom: "15px" }} >
           <Row
           id={`${id}`}

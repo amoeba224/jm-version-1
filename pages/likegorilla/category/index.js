@@ -47,7 +47,7 @@ export default function Category() {
       .then(() => alert("성공적으로 추가했습니다."))
       .then(() => getCategories())
       .catch(() =>
-        alert("유효하지 않은 요청입니다. 빈칸이나 중복된 카테고리는 생성할 수 없습니다.")
+        alert("유효하지 않은 요청입니다.")
       );
   };
 
@@ -56,13 +56,13 @@ export default function Category() {
       .delete(`/api/category/${id}`)
       .then(() => alert("성공적으로 삭제되었습니다."))
       .then(() => getCategories())
-      .catch((err) => console.log(err));
+      .catch((err) => alert("작업을 실행하지 못했습니다."));
   };
 
   useEffect(() => {
     authenticate().then((res) => {
       if (res === false) {
-        router.push("/");
+        router.push("/login");
       }
     });
     getCategories();

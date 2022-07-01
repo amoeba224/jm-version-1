@@ -1,14 +1,23 @@
-import Head from 'next/head'
-import Image from 'next/image'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AdminNavbar from '../../components/common/AdminNav'
 import Write from '../../components/common/Write'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from "@emotion/styled";
+import { useRouter } from "next/router";
+import { authenticate } from "../../public/auth";
 
 export default function Create(props) {
   const [active, setActive] = useState("전체");
-  console.log(props)
+  const router = useRouter();
+
+  useEffect(() => {
+    authenticate().then((res) => {
+      if (res === false) {
+        router.push("/login");
+      }
+    });
+  }, []);
+
   return (
     <>
       <AdminNavbar name="Likelion SKKU Notice Admin" active={active} />
