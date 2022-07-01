@@ -68,7 +68,7 @@ function Detail() {
                   return (
                     <span key={lineNum}>
                       {line}
-                      <br />
+                    <br />
                     </span>
                   );
                 })}
@@ -95,8 +95,9 @@ const CardContainer = styled.div`
 `
 
 const StyledBody = styled.div`
-  position: relative;
-  min-height: 100vh;
+  display:flex; 
+  flex-direction:column; 
+  height: 100vh;
 `
 
 export default Detail;

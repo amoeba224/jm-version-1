@@ -64,7 +64,7 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <StyledBody>
       <CustomNavbar name="Likelion SKKU Notice" active={active} />
       <StyledHeader id="styledHeader">
         <Pictures>
@@ -134,7 +134,7 @@ export default function Home() {
       </Layout>
       <br></br>
       <StyledFooter></StyledFooter>
-    </>
+    </StyledBody>
   );
 }
 
@@ -170,3 +170,9 @@ const StyledText = styled.div`
 const StyledImage = styled(Image)`
   border-radius: 10px;
 `;
+
+const StyledBody = styled.div`
+  display:flex; 
+  flex-direction:column; 
+  height: 100vh;
+`

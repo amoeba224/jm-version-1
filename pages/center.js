@@ -173,6 +173,7 @@ const StyledImage = styled(Image)`
 `;
 
 const StyledBody = styled.div`
-  position: relative;
-  min-height: 100vh;
+  display:flex; 
+  flex-direction:column; 
+  height: 100vh;
 `

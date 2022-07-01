@@ -30,6 +30,5 @@ const StyledFooter = styled.div`
   width: 100%;
   color: gray;
   text-align: center;
-  bottom: 0;
-  position: absolute;
+  margin-top:auto; 
 `;
