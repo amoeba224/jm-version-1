@@ -47,8 +47,9 @@ export default function Write(props) {
         });
     };
     if (
-      navigator.userAgent.toLowerCase().indexOf("android") > 0 ||
-      navigator.userAgent.toLowerCase().indexOf("ios") > 0
+      navigator.userAgent.toLowerCase().indexOf("android") >0 ||
+      navigator.userAgent.toLowerCase().indexOf("ios") >0 ||
+      navigator.userAgent.toLowerCase().indexOf("iphone") > 0
     ) {
       document.getElementById("titleInput").style.width = "100%"
       document.getElementById("bodyInput").style.width = "100%"

@@ -19,7 +19,8 @@ function NoticeList({ id, title, category, date, writer }) {
   useEffect(() => {
     if (
       navigator.userAgent.toLowerCase().indexOf("android") >0 ||
-      navigator.userAgent.toLowerCase().indexOf("ios") >0
+      navigator.userAgent.toLowerCase().indexOf("ios") >0 ||
+      navigator.userAgent.toLowerCase().indexOf("iphone") > 0
     ) {
       document.querySelectorAll(".noticeRow").forEach((item)=>{item.style.width = "100%"; item.style.padding="1px"})
     } else {

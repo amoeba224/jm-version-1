@@ -16,17 +16,19 @@ function Detail() {
 
   const getById = async (id) => {
     const { data } = await axios.get(`/api/notice/${id}`);
-    await setDetails(data);
+    await setDetails(data)
   };
 
   useEffect(() => {
     getById(id);
+    console.log(details.body?.length);
   }, [id]);
 
   useEffect(() => {
     if (
-      navigator.userAgent.toLowerCase().indexOf("android") > 0 ||
-      navigator.userAgent.toLowerCase().indexOf("ios") > 0
+      navigator.userAgent.toLowerCase().indexOf("android") >0 ||
+      navigator.userAgent.toLowerCase().indexOf("ios") >0 ||
+      navigator.userAgent.toLowerCase().indexOf("iphone") > 0
     ) {
       document.querySelectorAll(".cardClass").forEach((item) => {
         item.style.width = "100%";
@@ -64,7 +66,7 @@ function Detail() {
           </Card.Body>
         </Card>
       </div>
-      <StyledFooter></StyledFooter>
+      <StyledFooter isNoticeLong={details.body?.length > 1300}></StyledFooter>
     </>
   );
 }

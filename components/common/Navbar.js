@@ -41,7 +41,8 @@ export default function CustomNavbar(props) {
     });
     if (
       navigator.userAgent.toLowerCase().indexOf("android") > 0 ||
-      navigator.userAgent.toLowerCase().indexOf("ios") > 0
+      navigator.userAgent.toLowerCase().indexOf("ios") > 0 ||
+      navigator.userAgent.toLowerCase().indexOf("iphone") > 0
     ) {
       setImgWidth(230);
     }

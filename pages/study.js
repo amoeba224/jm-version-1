@@ -52,8 +52,9 @@ export default function Home() {
 
   useEffect(() => {
     if (
-      navigator.userAgent.toLowerCase().indexOf("android") > 0 ||
-      navigator.userAgent.toLowerCase().indexOf("ios") > 0
+      navigator.userAgent.toLowerCase().indexOf("android") >0 ||
+      navigator.userAgent.toLowerCase().indexOf("ios") >0 ||
+      navigator.userAgent.toLowerCase().indexOf("iphone") > 0
     ) {
       document.getElementById("inputBox").style.width="250px";
       document.getElementById("styledHeader").style.marginTop = "30px";

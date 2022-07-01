@@ -1,15 +1,17 @@
 import styled from "@emotion/styled";
 import { useEffect } from "react";
 
-export default function Footer() {
+export default function Footer(props) {
   useEffect(() => {
     if (
       navigator.userAgent.toLowerCase().indexOf("android") > 0 ||
-      navigator.userAgent.toLowerCase().indexOf("ios") > 0
+      navigator.userAgent.toLowerCase().indexOf("ios") > 0 ||
+      navigator.userAgent.toLowerCase().indexOf("iphone") > 0 ||
+      props.isNoticeLong === true
     ) {
       document.getElementById("styledFooter").style.position = "relative"
     };
-  }, []);
+  }, [props]);
 
   return (
     <StyledFooter id="styledFooter">
