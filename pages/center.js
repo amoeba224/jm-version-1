@@ -64,7 +64,7 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <StyledBody>
       <CustomNavbar name="Likelion SKKU Notice" active={active} />
       <StyledHeader id="styledHeader">
         <Pictures>
@@ -134,7 +134,7 @@ export default function Home() {
       </Layout>
       <br></br>
       <StyledFooter></StyledFooter>
-    </>
+    </StyledBody>
   );
 }
 
@@ -144,8 +144,9 @@ const Layout = styled.div`
   align-items: center;
   max-width: 800px;
   margin: 0 auto;
-  margin-bottom: 20px;
+  margin-bottom: 120px;
 `;
+
 const Pictures = styled.div`
   display: flex;
   justify-content: center;
@@ -170,3 +171,8 @@ const StyledText = styled.div`
 const StyledImage = styled(Image)`
   border-radius: 10px;
 `;
+
+const StyledBody = styled.div`
+  position: relative;
+  min-height: 100vh;
+`

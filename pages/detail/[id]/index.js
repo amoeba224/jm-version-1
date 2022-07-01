@@ -97,7 +97,6 @@ const CardContainer = styled.div`
 const StyledBody = styled.div`
   position: relative;
   min-height: 100vh;
-
 `
 
 export default Detail;
