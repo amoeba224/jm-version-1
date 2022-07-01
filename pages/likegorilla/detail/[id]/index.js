@@ -55,7 +55,9 @@ function Detail() {
           <Card.Header>{details.title}</Card.Header>
           <Card.Body>
             <blockquote className="blockquote mb-0">
-              <p> {details.body}</p>
+              <p> {details.body?.split("\n").map((line, lineNum)=>{
+                return (<span key={lineNum}>{line}<br/></span>)
+              })}</p>
             </blockquote>
           </Card.Body>
         </Card>

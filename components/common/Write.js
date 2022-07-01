@@ -25,6 +25,11 @@ export default function Write(props) {
     setCategories(data);
   };
 
+  const handleBrTags = (body) => {
+    console.log("before change" + body)
+    return body.replaceAll("<br>", "\n");
+  }
+
   useEffect(() => {
     authenticate().then((res) => {
       if (!res) {
@@ -66,7 +71,8 @@ export default function Write(props) {
           onSubmit={(event) => {
             event.preventDefault();
             const title = event.target.title.value;
-            const body = event.target.body.value;
+            const body = handleBrTags(event.target.body.value);
+            console.log(body);
             const writer = "Master";
             isNoticeValid(usingCategory).then((res) => {
               if (res === false) {
