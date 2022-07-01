@@ -78,7 +78,7 @@ function Detail() {
         </Card>
       </div>
       {/*determine if the detail's long with counting enters */}
-      <StyledFooter isNoticeLong={details.body?.split("\n").length>30}></StyledFooter>
+      <StyledFooter isNoticeLong={details.body?.split("\n").length>15}></StyledFooter>
     </>
   );
 }
