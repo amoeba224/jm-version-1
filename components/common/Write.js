@@ -26,7 +26,6 @@ export default function Write(props) {
   };
 
   const handleBrTags = (body) => {
-    console.log("before change" + body)
     return body.replaceAll("<br>", "\n");
   }
 
@@ -72,7 +71,6 @@ export default function Write(props) {
             event.preventDefault();
             const title = event.target.title.value;
             const body = handleBrTags(event.target.body.value);
-            console.log(body);
             const writer = "Master";
             isNoticeValid(usingCategory).then((res) => {
               if (res === false) {

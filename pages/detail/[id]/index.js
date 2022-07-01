@@ -16,18 +16,20 @@ function Detail() {
 
   const getById = async (id) => {
     const { data } = await axios.get(`/api/notice/${id}`);
-    await setDetails(data)
+    await setDetails(data);
   };
 
   useEffect(() => {
     getById(id);
-    console.log(details.body?.length);
   }, [id]);
+
+  useEffect(()=>{
+  }, [details])
 
   useEffect(() => {
     if (
-      navigator.userAgent.toLowerCase().indexOf("android") >0 ||
-      navigator.userAgent.toLowerCase().indexOf("ios") >0 ||
+      navigator.userAgent.toLowerCase().indexOf("android") > 0 ||
+      navigator.userAgent.toLowerCase().indexOf("ios") > 0 ||
       navigator.userAgent.toLowerCase().indexOf("iphone") > 0
     ) {
       document.querySelectorAll(".cardClass").forEach((item) => {
@@ -61,12 +63,22 @@ function Detail() {
 
           <Card.Body style={{ padding: "30px" }}>
             <blockquote className="blockquote mb-0">
-              <p> {details.body}</p>
+              <p>
+                {details.body?.split("\n").map((line, lineNum) => {
+                  return (
+                    <span key={lineNum}>
+                      {line}
+                      <br />
+                    </span>
+                  );
+                })}
+              </p>
             </blockquote>
           </Card.Body>
         </Card>
       </div>
-      <StyledFooter isNoticeLong={details.body?.length > 1300}></StyledFooter>
+      {/*determine if the detail's long with counting enters */}
+      <StyledFooter isNoticeLong={details.body?.split("\n").length>30}></StyledFooter>
     </>
   );
 }
